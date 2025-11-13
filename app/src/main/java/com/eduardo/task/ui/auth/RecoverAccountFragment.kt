@@ -9,13 +9,16 @@ import com.eduardo.task.R
 import com.eduardo.task.databinding.FragmentRegisterBinding
 
 
-class LoginFragment : Fragment() {
+class RecoverAccountFragment : Fragment() {
+
 
     private var _binding: FragmentRegisterBinding? = null
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View{
         _binding = FragmentRegisterBinding.inflate(inflater,container,false)
