@@ -7,19 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.eduardo.task.R
-import com.eduardo.task.databinding.FragmentRegisterBinding
-
+import com.eduardo.task.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
 
-    private var _binding: FragmentRegisterBinding? = null
+    private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
-        _binding = FragmentRegisterBinding.inflate(inflater,container,false)
+    ): View {
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -28,8 +27,11 @@ class LoginFragment : Fragment() {
 
         initListener()
     }
-    private fun initListener() {
 
+    private fun initListener() {
+        binding.buttonLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_global_homeFragment)
+        }
         binding.btnRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
@@ -38,7 +40,6 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_recoverAccountFragment)
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

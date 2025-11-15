@@ -51,6 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login"
+            android:id="@+id/buttonLogin"
             android:textColor="@color/color_default"
             app:backgroundTint="@null"
             android:background="@drawable/bg_btn"
@@ -83,7 +84,14 @@
             android:indeterminateTint="@color/white"
             android:layout_gravity="center"
             android:visibility="invisible"
-            app:visibility="visible"/>
+            tools:visibility="visible"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Eduardo Zardo Soares"
+            android:id="@+id/nome"
+            android:textColor="@color/white"/>
+
 
     </LinearLayout>
 

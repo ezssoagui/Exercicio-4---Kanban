@@ -84,7 +84,14 @@
                 android:id="@+id/progressBar"
                 android:layout_marginTop="8dp"
                 android:visibility="invisible"
-                app:visibility="visible"/>
+                tools:visibility="visible"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Eduardo Zardo Soares"
+                android:id="@+id/nome1"
+                android:textColor="@color/white"/>
         </LinearLayout>
 
 
