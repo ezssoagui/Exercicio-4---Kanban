@@ -16,21 +16,18 @@
             android:layout_height="wrap_content"
             android:id="@+id/ConstraintLayout1">
             <com.google.android.material.tabs.TabLayout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
                 android:id="@+id/tabs"
                 android:background="@color/color_default"
                 android:contentDescription="Tabs"
                 android:elevation="0dp"
-                app:tabMode="scrollable"
-                app:tabPaddingStart="24dp"
+                app:tabTextAppearance="@style/CustomTabLayout"
                 app:tabPaddingEnd="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:tabIndicatorColor="@color/white"
-                app:tabSelectedTextColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/btnLogout"
                 app:tabTextColor="@color/white" />
             <ImageButton
                 android:layout_width="wrap_content"
