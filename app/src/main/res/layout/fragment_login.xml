@@ -29,6 +29,8 @@
             android:layout_height="48dp"
             android:hint="Digite seu e-mail"
             android:inputType="textEmailAddress"
+            style="@style/EditTextTheme"
+            android:id="@+id/digiteEmail"
             android:padding="10dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/bg_edit_text"/>
@@ -43,6 +45,8 @@
             android:layout_height="48dp"
             android:inputType="textPassword"
             android:hint="Digite sua senha"
+            android:id="@+id/digiteSenha"
+            style="@style/EditTextTheme"
             android:padding="10dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/bg_edit_text"/>
@@ -51,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login"
+            style="@style/ButtonTheme"
             android:id="@+id/buttonLogin"
             android:textColor="@color/color_default"
             app:backgroundTint="@null"
