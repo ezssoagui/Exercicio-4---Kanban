@@ -42,13 +42,14 @@ class RecoverAccountFragment : Fragment() {
             validateData()
         }
     }
-    private fun validateData(){
+    private fun validateData() {
         val email = binding.digiteEmail.text.toString().trim()
 
-        if (email.isNotBlank()){
+        if (email.isNotBlank()) {
             Toast.makeText(requireContext(), "Tudo OK!", Toast.LENGTH_SHORT).show()
         } else {
-            showBottomSheet(message = R.string.email_empty)
+            // CORREÇÃO: Adicionado getString()
+            showBottomSheet(message = getString(R.string.email_empty))
         }
     }
 

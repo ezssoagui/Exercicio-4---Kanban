@@ -38,15 +38,14 @@ class FormTaskFragment : Fragment() {
             validateData()
         }
     }
-    private fun validateData(){
+    private fun validateData() {
         val description = binding.editTextDescricao.text.toString().trim()
-        if (description.isNotEmpty()){
+        if (description.isNotEmpty()) {
             Toast.makeText(requireContext(), "Tudo OK!", Toast.LENGTH_SHORT).show()
         } else {
-            showBottomSheet(message = R.string.description_empty_form_task_fragment)
-
+            // Correção aqui: adicione o getString()
+            showBottomSheet(message = getString(R.string.description_empty_form_task_fragment))
         }
-
     }
 
     override fun onDestroyView() {

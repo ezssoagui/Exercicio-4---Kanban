@@ -6,6 +6,8 @@
     <color name="green">#00FF00</color>
     <color name="color_delete">#FF4C3B</color>
     <color name="color_details">#04D5C1</color>
+    <color name="color_status_todo">#FF5722</color>
+    <color name="color_status_done">#8BC34A</color>"
 
-"
+
 </resources>

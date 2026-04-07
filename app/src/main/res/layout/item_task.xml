@@ -44,7 +44,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/buttonEditar"
                 app:layout_constraintEnd_toStartOf="@+id/buttonDelete"
-                app:tint="@color/color_default"
+
                 android:contentDescription="Anterior"/>
 
             <!-- Botão Remover -->
@@ -111,7 +111,7 @@
                 app:layout_constraintStart_toEndOf="@+id/buttonDetails"
                 app:layout_constraintTop_toTopOf="@+id/buttonEditar"
                 android:contentDescription="Proximo"
-                app:tint="@color/color_default"
+
                 />
 
 
