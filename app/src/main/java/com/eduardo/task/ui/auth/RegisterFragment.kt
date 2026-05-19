@@ -49,7 +49,7 @@ class RegisterFragment : Fragment() {
         if (email.isNotBlank()) {
             if (senha.isNotBlank()) {
                 binding.progressBar.isVisible = true
-                findNavController().navigate(R.id.action_global_homeFragment)
+                registerUser(email, senha)
             } else {
                 showBottomSheet(message = getString(R.string.password_empty_register_fragment))
             }
@@ -84,4 +84,13 @@ class RegisterFragment : Fragment() {
         _binding = null
     }
 }
+
+
+
+
+
+
+
+
+
 
