@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.eduardo.task.util.showBottomSheet
 import com.eduardo.task.R
@@ -47,6 +48,7 @@ class RegisterFragment : Fragment() {
 
         if (email.isNotBlank()) {
             if (senha.isNotBlank()) {
+                binding.progressBar.isVisible = true
                 findNavController().navigate(R.id.action_global_homeFragment)
             } else {
                 showBottomSheet(message = getString(R.string.password_empty_register_fragment))
@@ -65,6 +67,7 @@ class RegisterFragment : Fragment() {
                     if (task.isSuccessful) {
                         findNavController().navigate(R.id.action_global_homeFragment)
                     } else {
+                        binding.progressBar.isVisible = false
                         Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -81,3 +84,4 @@ class RegisterFragment : Fragment() {
         _binding = null
     }
 }
+
