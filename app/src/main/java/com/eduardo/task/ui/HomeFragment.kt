@@ -9,11 +9,15 @@ import com.eduardo.task.R
 import com.eduardo.task.databinding.FragmentHomeBinding
 import com.eduardo.task.ui.adapter.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-
+import com.google.firebase.auth.FirebaseAuth
+import androidx.navigation.fragment.findNavController
+import com.eduardo.task.util.showBottomSheet
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth:  FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,8 +29,26 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initListeners()
+        auth = FirebaseAuth.getInstance()
         initTabs()
     }
+
+    private fun initListeners() {
+        binding.btnLogout.setOnClickListener {
+            showBottomSheet(
+                titleButton = R.string.text_button_dialog_confirm_logout,
+                titleDialog = R.string.text_title_dialog_confira_logout,
+                message= getString(R.string.text_message_dialog_confirm_logout),
+                onClick = {
+                    auth.signOut()
+                    findNavController().navigate(R.id.action_homeFragment_to_autentication)
+                }
+            )
+        }
+    }
+
+
 
     private fun initTabs() {
         val pageAdapter = ViewPagerAdapter(requireActivity())
