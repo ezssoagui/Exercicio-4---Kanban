@@ -10,11 +10,15 @@ import androidx.navigation.fragment.findNavController
 import com.eduardo.task.R
 import com.eduardo.task.util.showBottomSheet
 import com.eduardo.task.databinding.FragmentLoginBinding
+import com.google.firebase.auth.FirebaseAuth
+import androidx.core.view.isVisible
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +30,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        auth = FirebaseAuth.getInstance()
         initListener()
     }
 
@@ -48,8 +52,8 @@ class LoginFragment : Fragment() {
 
         if (email.isNotBlank()){
             if (senha.isNotBlank()){
-                //Comentário temporário somente para testar a validação dos dados
-                findNavController().navigate(R.id.action_global_homeFragment)
+                binding.progressBar.isVisible = true
+                loginUser(email, senha)
             } else {
                 showBottomSheet(message = getString(R.string.password_empty))
             }
@@ -57,6 +61,39 @@ class LoginFragment : Fragment() {
 
             showBottomSheet(message = getString(R.string.email_empty))
         }
+    }
+    private fun loginUser(email: String, password: String){
+
+        try {
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if(task.isSuccessful){
+                        findNavController().navigate(R.id.action_global_homeFragment)
+
+                    }else{
+
+                        binding.progressBar.isVisible = false
+
+                        Toast.makeText(
+                            requireContext(),
+                            task.exception?.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    }
+
+                }
+
+        }catch (e: Exception){
+
+            Toast.makeText(
+                requireContext(),
+                e.message.toString(),
+                Toast.LENGTH_SHORT
+            ).show()
+
+        }
+
     }
 
     override fun onDestroyView() {
