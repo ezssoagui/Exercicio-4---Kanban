@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.eduardo.task.R
-import com.eduardo.task.util.showBottomSheet
 import com.eduardo.task.databinding.FragmentLoginBinding
+import com.eduardo.task.util.showBottomSheet
 import com.google.firebase.auth.FirebaseAuth
-import androidx.core.view.isVisible
 
 class LoginFragment : Fragment() {
 
@@ -21,7 +21,8 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
@@ -30,14 +31,16 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         auth = FirebaseAuth.getInstance()
         initListener()
     }
 
     private fun initListener() {
         binding.buttonLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_global_homeFragment)
+            validateData()
         }
+
         binding.btnRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
@@ -46,59 +49,45 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_recoverAccountFragment)
         }
     }
-    private fun validateData(){
+
+    private fun validateData() {
         val email = binding.digiteEmail.text.toString().trim()
         val senha = binding.digiteSenha.text.toString().trim()
 
-        if (email.isNotBlank()){
-            if (senha.isNotBlank()){
-                binding.progressBar.isVisible = true
-                loginUser(email, senha)
-            } else {
-                showBottomSheet(message = getString(R.string.password_empty))
-            }
-        } else {
-
+        if (email.isBlank()) {
             showBottomSheet(message = getString(R.string.email_empty))
+            return
         }
+
+        if (senha.isBlank()) {
+            showBottomSheet(message = getString(R.string.password_empty))
+            return
+        }
+
+        binding.progressBar.isVisible = true
+        loginUser(email, senha)
     }
-    private fun loginUser(email: String, password: String){
 
-        try {
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if(task.isSuccessful){
-                        findNavController().navigate(R.id.action_global_homeFragment)
+    private fun loginUser(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
 
-                    }else{
+                binding.progressBar.isVisible = false
 
-                        binding.progressBar.isVisible = false
-
-                        Toast.makeText(
-                            requireContext(),
-                            task.exception?.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                    }
-
+                if (task.isSuccessful) {
+                    findNavController().navigate(R.id.action_global_homeFragment)
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "E-mail ou senha inválidos",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-
-        }catch (e: Exception){
-
-            Toast.makeText(
-                requireContext(),
-                e.message.toString(),
-                Toast.LENGTH_SHORT
-            ).show()
-
-        }
-
+            }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

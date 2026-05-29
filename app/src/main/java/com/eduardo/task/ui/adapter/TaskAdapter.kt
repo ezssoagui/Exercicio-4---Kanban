@@ -65,6 +65,7 @@ class TaskAdapter(
                 holder.binding.buttonForward.setOnClickListener { taskSelected(task, SELECT_NEXT)}
             }
 
+
             Status.DOING -> {
                 //configurar a cor diferente para as setas
                 holder.binding.buttonBack.setColorFilter(
